@@ -143,6 +143,10 @@ function speciesMatchesFilter(s, f) {
 
 function pairMatchesMonth(pair, monthBit) {
   if (!monthBit) return true;
+  // species without explicit month data (year-round / unknown timing)
+  // pass through unconditionally — month is a soft filter that only
+  // restricts species WITH known seasonality.
+  if (!pair.mb) return true;
   return (pair.mb & monthBit) > 0;
 }
 
